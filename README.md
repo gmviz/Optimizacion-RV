@@ -6,7 +6,6 @@ Alumno: Guillermo Mata Vizcaíno
 >Para probar y utilizar este proyecto sin necesidad de gafas de Realidad Virtual físicas, es obligatorio ejecutar el archivo `LanzarConSimulador.bat` incluido en la carpeta
 
 ## 1. Comparativa Global de Rendimiento (Antes vs. Después)
-Medidas sacadas en **VR Preview** desde el mismo `PlayerStart` fijo mediante `stat fps`, `stat unit`, `stat rhi` y la herramienta de auditoría `Statistics`:
 
 | Métrica | Escena Inicial (`escena-inicial`) | Escena Optimizada (`main`) | Mejora / Diferencia |
 | :--- | :---: | :---: | :---: |
@@ -26,7 +25,6 @@ Medidas sacadas en **VR Preview** desde el mismo `PlayerStart` fijo mediante `st
 
 ## 2. Comparativa Visual y de Estadísticas
 
-### Rendimiento en tiempo real (`stat fps`, `stat unit`, `stat rhi`)
 
 | Escena Inicial (`escena-inicial`) | Escena Optimizada (`main`) |
 | :---: | :---: |
