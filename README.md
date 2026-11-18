@@ -1,5 +1,5 @@
 
-## PROYECTO: Interacción en Realidad Virtual - Minijuegos
+## PROYECTO: Optimización Realidad Virtual
 Alumno: Guillermo Mata Vizcaíno
 
 * **Enlace al recurso original (FAB):** [Detective Office - [https://www.fab.com/listings/82fea2b7-ffde-4a9f-9ec7-17faa7504477]
