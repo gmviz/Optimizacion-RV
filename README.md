@@ -3,7 +3,6 @@
 Alumno: Guillermo Mata Vizcaíno
 
 * **Enlace al recurso original (FAB):** [Detective Office - [https://www.fab.com/listings/82fea2b7-ffde-4a9f-9ec7-17faa7504477]
-* **Pipeline de renderizado:** Forward Shading + Iluminación Estática Bakeada (Lumen desactivado).
 >Para probar y utilizar este proyecto sin necesidad de gafas de Realidad Virtual físicas, es obligatorio ejecutar el archivo `LanzarConSimulador.bat` incluido en la carpeta
 
 ## 1. Comparativa Global de Rendimiento (Antes vs. Después)
@@ -49,19 +48,16 @@ Medidas sacadas en **VR Preview** desde el mismo `PlayerStart` fijo mediante `st
 ## 3. Técnicas de Optimización Aplicadas
 
 1. **Reducción de Draw Calls y Gestión de Geometría:**
-   * Agrupación de bloques estructurales y conjuntos de mobiliario mediante **Merge Actors**, reduciendo el número de mallas en escena en un **98.2%** (`2,274` a `40`)[cite: 15] y recortando las llamadas de dibujado (`Draws`) en un **52.8%** (`1,198` a `565`)[cite: 13].
-   * Desactivación de **Nanite** (incompatible con el renderizado VR seleccionado) y asignación de **LOD Groups** (`LevelArchitecture`, `LargeProp`, `SmallProp`) verificados mediante *Mesh LOD Coloration*.
-   * *Justificación técnica del conteo de primitivas:* El aumento de `Prims` en pantalla (`414.8 K` a `2,936.5 K`)[cite: 13] se debe a desactivar Nanite (exponiendo el LOD 0 real de las mallas) y a agrupar bloques amplios que reducen el *Frustum Culling* individual; sin embargo, este intercambio reduce drásticamente el cuello de botella de CPU (`Game` baja a `2.91 ms` y `Draw` a `2.09 ms`)[cite: 13] mientras la GPU absorbe la carga en apenas `5.19 ms`[cite: 13].
+   * Agrupación de mallas y conjuntos de mobiliario mediante **Merge Actors**, reduciendo el número de mallas en escena en un **98.2%** (De `2,274` a `40`) y recortando las llamadas de dibujado (`Draws`) en un **52.8%** (`1,198` a `565`).
+   * Desactivación de **Nanite** y asignación de **LOD Groups** (`LevelArchitecture`, `LargeProp`, `SmallProp`).
 
 2. **Optimización de Texturas y Memoria VRAM:**
-   * Auditoría mediante `Tools > Audit > Statistics > Texture Stats` y edición en lote (*Property Matrix*) limitando `Maximum Texture Size` a **2048px** para superficies arquitectónicas y **1024px / 512px** para mobiliario y props.
-   * Corrección de activos defectuosos de origen: ajuste a potencia de dos (`Pad to Power of Two`) en `T_soil1` para habilitar compresión DXT1 y reasignación de perfil `Normalmap (BC5)` en `T_T_Glass_Normal`, logrando un ahorro de **1.31 GB** en memoria de texturas cargadas[cite: 16].
+   * Auditoría mediante `Tools > Audit > Statistics > Texture Stats` y edición en lote (*Property Matrix*) limitando `Maximum Texture Size` a **2048px**.
 
 3. **Iluminación Estática Bakeada y Configuración VR:**
    * Uso de **Forward Shading** con iluminación global dinámica y reflejos de Lumen deshabilitados.
-   * Conversión de todas las luces y Blueprints de iluminación a movilidad **Static** (eliminando los 9 avisos de luces dinámicas solapadas)[cite: 13], delimitación del espacio jugable con **Lightmass Importance Volume**, ajuste de **Lightmap Density** y horneado final en calidad **Production**.
-   * Configuración de los subniveles en modo **Always Loaded** y ajuste de colisiones complejas para asegurar la carga completa del entorno en *VR Preview*.
-
+   * Conversión de todas las luces y Blueprints de iluminación a movilidad **Static** (eliminando los 9 avisos de luces dinámicas solapadas), delimitación del espacio jugable con **Lightmass Importance Volume**, ajuste de **Lightmap Density** y bakeado de luces final en calidad **Production**.
+   * Configuración de los subniveles en modo **Always Loaded** y ajuste de colisiones complejas para asegurar la carga del entorno en *VR Preview* sin tener objetos invisibles.
 
 ## 4. Conclusión: Técnica de Mayor Impacto
-Las intervenciones con mayor impacto directo en la estabilidad para Realidad Virtual fueron la **iluminación estática bakeada sobre Forward Shading** junto con la **reducción de Draw Calls mediante Merge Actors**. Eliminar el cálculo de sombras dinámicas en tiempo real y reducir más de la mitad de las llamadas de dibujado permitió recortar el tiempo de procesamiento de CPU (`Game` y `Draw`) a prácticamente la mitad (`2.91 ms` y `2.09 ms`), dejando un margen muy amplio respecto al umbral de `11.1 ms` exigido para sostener 90 FPS estables sin reproyección.
+Las mejoras con mayor impacto en la estabilidad y la opcimización para Realidad Virtual fueron la **iluminación estática bakeada sobre Forward Shading** junto con la **reducción de Draw Calls mediante Merge Actors**. Eliminar el cálculo de sombras dinámicas en tiempo real y reducir más de la mitad de las llamadas de dibujado permitió recortar el tiempo de procesamiento de CPU (`Game` y `Draw`) a prácticamente la mitad (`2.91 ms` y `2.09 ms`), dejando un margen muy amplio respecto al umbral de `11.1 ms` exigido para sostener 90 FPS estables sin reproyección.
