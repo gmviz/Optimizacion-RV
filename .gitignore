@@ -56,3 +56,4 @@ Plugins/**/*.exe
 Plugins/**/*.dll
 Plugins/**/*.apk
 Plugins/**/*_Data/
+Plugins/** linguist-vendored
