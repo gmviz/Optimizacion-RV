@@ -3,7 +3,7 @@
 Alumno: Guillermo Mata Vizcaíno
 
 * **Enlace al recurso original (FAB):** [Detective Office - [https://www.fab.com/listings/82fea2b7-ffde-4a9f-9ec7-17faa7504477]
->Para probar y utilizar este proyecto sin necesidad de gafas de Realidad Virtual físicas, es obligatorio ejecutar el archivo `LanzarConSimulador.bat` incluido en la carpeta
+>Para probar y utilizar este proyecto sin necesidad de gafas de Realidad Virtual físicas, es obligatorio ejecutar el archivo `LanzarConSimulador.bat` incluido en la carpeta. La versión original sin optimizar se encuentra en la rama `escena-inicial-sin-optimizar`.
 
 ## 1. Comparativa Global de Rendimiento (Antes vs. Después)
 
