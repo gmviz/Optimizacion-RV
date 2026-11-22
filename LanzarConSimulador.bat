@@ -1,11 +1,11 @@
 @echo off
 setlocal
-rem Abre Practica5 en UE 5.8 usando el Meta XR Simulator v81 portable de esta carpeta.
+rem Abre Practica5_SinOptimizar en UE 5.8 usando el Meta XR Simulator v81 portable de esta carpeta.
 rem No instala nada ni toca el registro: el OpenXR loader usa XR_RUNTIME_JSON antes que el
 rem runtime activo del sistema, y la variable solo vive en los procesos lanzados desde aqui.
 rem Uso: doble clic. Si UE 5.8 no esta en la ruta por defecto: set UE_ROOT=D:\Ruta\UE_5.8
 
-set "PROJECT=%~dp0Practica5.uproject"
+set "PROJECT=%~dp0Practica5_SinOptimizar.uproject"
 set "XRSIM_DIR=%~dp0meta_xr_simulator_windows_81.0.0.865.254"
 set "XR_RUNTIME_JSON=%XRSIM_DIR%\meta_openxr_simulator.json"
 
